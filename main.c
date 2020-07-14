@@ -12,13 +12,13 @@ typedef struct node {
     int data;
 } node_t;
 
-int front = -1;
-int rear = -1;
+int front = 0;
+int rear = 0;
 
 node_t queue[MAX_LEN] = {0};
 
 bool isEmpty() {
-    return (front == -1);
+    return (front == rear);
 }
 
 bool isFull() {
@@ -35,31 +35,25 @@ node_t* createNode(int newValue) {
 void enqueue(int value) {
     node_t *newNode = createNode(value);
     if (newNode == NULL) {
-        printf("No memory available");
+        printf("Error: No memory available\n");
     } else {
         if (isEmpty()) {
-            queue[0] = *newNode;
-            printf("***inside if %d***", queue[0].data);
-            front = 0;
-            rear = 0;
-        } else if (isFull()) {
-            printf("Sorry, Queue is full.");
-        } else {
-            printf("*** BEFORE: %d ***\n", rear);
-            rear = rear == 0 ? 1 : (rear + 1) % MAX_LEN;
-            printf("*** AFTER: %d ***\n", rear);
             queue[rear] = *newNode;
-        }        
+        } else if (isFull()) {
+            printf("Error: Queue is full.\n");
+            return;
+        } else {
+            queue[rear] = *newNode;
+        }
+        rear = rear == 0 ? 1 : (rear + 1) % MAX_LEN;        
     }
-    
-    printf("*** %d ***\n", rear);
     
 }
 
 int dequeue() {
     int value = -1;
     if (isEmpty()) {
-        printf("Queue is empty");
+        printf("Error: Queue is empty\n");
     } else {
         value = queue[front].data;
         queue[front].data = -1;
@@ -79,9 +73,6 @@ void printQueue() {
 }
 
 void testCase1() {
-    
-    //This test case should fail and not allow all elements 70 and 80 to be
-    //added to the queue.
     
     printf("*******************\n");
     printf("****TEST CASE 1****\n");
@@ -129,9 +120,6 @@ void testCase1() {
 }
 
 void testCase2() {
-    
-    //This test case should and not allow all the elements to be 
-    //added to and popped the queue.
     
     printf("*******************\n");
     printf("****TEST CASE 2****\n");
@@ -192,33 +180,43 @@ void testCase2() {
     printQueue();
     printf("\n");
     
+    printf("Dequeuing an element:\n");
+    dequeue();
+    printQueue();
+    printf("\n");
+    
+    printf("Dequeuing an element:\n");
+    dequeue();
+    printQueue();
+    printf("\n");
+    
+    printf("Dequeuing an element:\n");
+    dequeue();
+    printQueue();
+    printf("\n");
+    
+    printf("Dequeuing an element:\n");
+    dequeue();
+    printQueue();
+    printf("\n");
+    
+    printf("Dequeuing an element:\n");
+    dequeue();
+    printQueue();
+    printf("\n");
+    
+    printf("Dequeuing an element:\n");
+    dequeue();
+    printQueue();
+    printf("\n");
+    
     printf("Adding eighth element:\n");
     enqueue(80);
     printQueue();
     printf("\n");
     
-    printf("Dequeuing an element:\n");
-    dequeue();
-    printQueue();
-    printf("\n");
-    
-    printf("Dequeuing an element:\n");
-    dequeue();
-    printQueue();
-    printf("\n");
-    
-    printf("Dequeuing an element:\n");
-    dequeue();
-    printQueue();
-    printf("\n");
-    
-    printf("Dequeuing an element:\n");
-    dequeue();
-    printQueue();
-    printf("\n");
-    
-    printf("Dequeuing an element:\n");
-    dequeue();
+    printf("Adding nineth element:\n");
+    enqueue(90);
     printQueue();
     printf("\n");
     
@@ -231,8 +229,8 @@ void testCase2() {
 
 void resetQueue() {
     int i = 0;
-    front = -1;
-    rear = -1;
+    front = 0;
+    rear = 0;
     for (i = 0; i < MAX_LEN; i++) {
         queue[i].data = 0;
     }
@@ -243,17 +241,6 @@ int main() {
     testCase1();
     resetQueue();
     testCase2();
-
-//    
-//    dequeue();
-//    printQueue();
-//    enqueue(40);
-//    enqueue(50);
-//    enqueue(60);
-//    enqueue(70);
-//    enqueue(80);
-//    enqueue(90);
-//    printQueue();
     
     exit(0);
 }
