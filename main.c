@@ -37,17 +37,14 @@ void enqueue(int value) {
     if (newNode == NULL) {
         printf("Error: No memory available\n");
     } else {
-        if (isEmpty()) {
-            queue[rear] = *newNode;
-        } else if (isFull()) {
+        if (isFull()) {
             printf("Error: Queue is full.\n");
             return;
         } else {
             queue[rear] = *newNode;
         }
         rear = rear == 0 ? 1 : (rear + 1) % MAX_LEN;        
-    }
-    
+    }   
 }
 
 int dequeue() {
