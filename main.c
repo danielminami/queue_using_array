@@ -61,8 +61,7 @@ int dequeue() {
 
 void printQueue() {
     printf("Printing all elements: \n");
-    int i = 0;
-    for (i = 0; i < MAX_LEN; i++) {
+    for (int i = 0; i < MAX_LEN; i++) {
         printf("%d ", queue[i].data);
     }
     printf("  FRONT:%d  REAR:%d", front, rear);
@@ -225,10 +224,10 @@ void testCase2() {
 }
 
 void resetQueue() {
-    int i = 0;
+
     front = 0;
     rear = 0;
-    for (i = 0; i < MAX_LEN; i++) {
+    for (int i = 0; i < MAX_LEN; i++) {
         queue[i].data = 0;
     }
 }
