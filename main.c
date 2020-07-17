@@ -22,8 +22,7 @@ bool isEmpty() {
 }
 
 bool isFull() {
-    int calculatedRear = rear == 0 ? 1 : (rear +1) % MAX_LEN; 
-    return front == calculatedRear;
+    return (rear+1)% MAX_LEN == front;
 }
 
 node_t* createNode(int newValue) {
@@ -43,7 +42,7 @@ void enqueue(int value) {
         } else {
             queue[rear] = *newNode;
         }
-        rear = rear == 0 ? 1 : (rear + 1) % MAX_LEN;        
+        rear = (rear + 1) % MAX_LEN;        
     }   
 }
 
